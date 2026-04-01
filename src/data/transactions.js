@@ -1,0 +1,110 @@
+// Mock financial data - simulates ~6 months of transactions
+
+export const CATEGORIES = [
+  'Food & Dining',
+  'Transport',
+  'Shopping',
+  'Entertainment',
+  'Healthcare',
+  'Utilities',
+  'Rent',
+  'Salary',
+  'Freelance',
+  'Investment',
+  'Education',
+  'Travel',
+]
+
+export const CATEGORY_COLORS = {
+  'Food & Dining':  '#f97316',
+  'Transport':      '#3b82f6',
+  'Shopping':       '#a855f7',
+  'Entertainment':  '#ec4899',
+  'Healthcare':     '#10b981',
+  'Utilities':      '#6366f1',
+  'Rent':           '#ef4444',
+  'Salary':         '#22c55e',
+  'Freelance':      '#14b8a6',
+  'Investment':     '#f59e0b',
+  'Education':      '#8b5cf6',
+  'Travel':         '#06b6d4',
+}
+
+export const INITIAL_TRANSACTIONS = [
+  // November 2024
+  { id: 1,  date: '2024-11-01', description: 'Monthly Salary',          category: 'Salary',         amount: 85000, type: 'income'  },
+  { id: 2,  date: '2024-11-02', description: 'Rent Payment',             category: 'Rent',           amount: 22000, type: 'expense' },
+  { id: 3,  date: '2024-11-04', description: 'Zomato — lunch',           category: 'Food & Dining',  amount: 480,   type: 'expense' },
+  { id: 4,  date: '2024-11-06', description: 'Mumbai Metro pass',        category: 'Transport',      amount: 600,   type: 'expense' },
+  { id: 5,  date: '2024-11-08', description: 'Netflix subscription',     category: 'Entertainment',  amount: 649,   type: 'expense' },
+  { id: 6,  date: '2024-11-10', description: 'Freelance project — UI',   category: 'Freelance',      amount: 18000, type: 'income'  },
+  { id: 7,  date: '2024-11-12', description: 'Pharmacy',                 category: 'Healthcare',     amount: 1200,  type: 'expense' },
+  { id: 8,  date: '2024-11-15', description: 'Electricity bill',         category: 'Utilities',      amount: 1800,  type: 'expense' },
+  { id: 9,  date: '2024-11-18', description: 'Amazon — keyboard',        category: 'Shopping',       amount: 4500,  type: 'expense' },
+  { id: 10, date: '2024-11-20', description: 'Udemy course',             category: 'Education',      amount: 999,   type: 'expense' },
+  { id: 11, date: '2024-11-22', description: 'Dinner with team',         category: 'Food & Dining',  amount: 1800,  type: 'expense' },
+  { id: 12, date: '2024-11-25', description: 'Mutual Fund SIP',          category: 'Investment',     amount: 5000,  type: 'expense' },
+  { id: 13, date: '2024-11-28', description: 'Swiggy groceries',         category: 'Food & Dining',  amount: 1200,  type: 'expense' },
+
+  // December 2024
+  { id: 14, date: '2024-12-01', description: 'Monthly Salary',          category: 'Salary',         amount: 85000, type: 'income'  },
+  { id: 15, date: '2024-12-02', description: 'Rent Payment',             category: 'Rent',           amount: 22000, type: 'expense' },
+  { id: 16, date: '2024-12-05', description: 'Goa trip flights',         category: 'Travel',         amount: 9800,  type: 'expense' },
+  { id: 17, date: '2024-12-07', description: 'Ola cabs',                 category: 'Transport',      amount: 1200,  type: 'expense' },
+  { id: 18, date: '2024-12-10', description: 'Christmas shopping',       category: 'Shopping',       amount: 8500,  type: 'expense' },
+  { id: 19, date: '2024-12-12', description: 'Year-end bonus',           category: 'Salary',         amount: 40000, type: 'income'  },
+  { id: 20, date: '2024-12-14', description: 'Goa hotel stay',           category: 'Travel',         amount: 12000, type: 'expense' },
+  { id: 21, date: '2024-12-18', description: 'Freelance — web redesign', category: 'Freelance',      amount: 25000, type: 'income'  },
+  { id: 22, date: '2024-12-20', description: 'Internet bill',            category: 'Utilities',      amount: 999,   type: 'expense' },
+  { id: 23, date: '2024-12-22', description: 'Spotify premium',          category: 'Entertainment',  amount: 119,   type: 'expense' },
+  { id: 24, date: '2024-12-25', description: 'Restaurant — Christmas',   category: 'Food & Dining',  amount: 3200,  type: 'expense' },
+  { id: 25, date: '2024-12-28', description: 'Mutual Fund SIP',          category: 'Investment',     amount: 5000,  type: 'expense' },
+
+  // January 2025
+  { id: 26, date: '2025-01-01', description: 'Monthly Salary',          category: 'Salary',         amount: 85000, type: 'income'  },
+  { id: 27, date: '2025-01-02', description: 'Rent Payment',             category: 'Rent',           amount: 22000, type: 'expense' },
+  { id: 28, date: '2025-01-04', description: 'Gym membership',           category: 'Healthcare',     amount: 2500,  type: 'expense' },
+  { id: 29, date: '2025-01-06', description: 'Rapido rides',             category: 'Transport',      amount: 850,   type: 'expense' },
+  { id: 30, date: '2025-01-08', description: 'Zomato — weekly',          category: 'Food & Dining',  amount: 2100,  type: 'expense' },
+  { id: 31, date: '2025-01-10', description: 'Freelance — logo design',  category: 'Freelance',      amount: 8000,  type: 'income'  },
+  { id: 32, date: '2025-01-14', description: 'Netflix + Prime combo',    category: 'Entertainment',  amount: 1200,  type: 'expense' },
+  { id: 33, date: '2025-01-18', description: 'Electricity bill',         category: 'Utilities',      amount: 2100,  type: 'expense' },
+  { id: 34, date: '2025-01-20', description: 'New Year clothes',         category: 'Shopping',       amount: 5600,  type: 'expense' },
+  { id: 35, date: '2025-01-22', description: 'React course — Udemy',     category: 'Education',      amount: 499,   type: 'expense' },
+  { id: 36, date: '2025-01-25', description: 'Mutual Fund SIP',          category: 'Investment',     amount: 5000,  type: 'expense' },
+  { id: 37, date: '2025-01-28', description: 'Weekend outing food',      category: 'Food & Dining',  amount: 1600,  type: 'expense' },
+
+  // February 2025
+  { id: 38, date: '2025-02-01', description: 'Monthly Salary',          category: 'Salary',         amount: 85000, type: 'income'  },
+  { id: 39, date: '2025-02-02', description: 'Rent Payment',             category: 'Rent',           amount: 22000, type: 'expense' },
+  { id: 40, date: '2025-02-05', description: 'Valentine dinner',         category: 'Food & Dining',  amount: 4200,  type: 'expense' },
+  { id: 41, date: '2025-02-07', description: 'Auto rickshaw rides',      category: 'Transport',      amount: 620,   type: 'expense' },
+  { id: 42, date: '2025-02-10', description: 'Freelance — dashboard UI', category: 'Freelance',      amount: 32000, type: 'income'  },
+  { id: 43, date: '2025-02-12', description: 'Doctor consultation',      category: 'Healthcare',     amount: 800,   type: 'expense' },
+  { id: 44, date: '2025-02-14', description: 'Gift for partner',         category: 'Shopping',       amount: 3800,  type: 'expense' },
+  { id: 45, date: '2025-02-16', description: 'Movie tickets',            category: 'Entertainment',  amount: 900,   type: 'expense' },
+  { id: 46, date: '2025-02-18', description: 'Internet + phone bill',    category: 'Utilities',      amount: 1499,  type: 'expense' },
+  { id: 47, date: '2025-02-20', description: 'Investment dividend',      category: 'Investment',     amount: 3200,  type: 'income'  },
+  { id: 48, date: '2025-02-22', description: 'Swiggy — groceries',       category: 'Food & Dining',  amount: 2800,  type: 'expense' },
+  { id: 49, date: '2025-02-25', description: 'Mutual Fund SIP',          category: 'Investment',     amount: 5000,  type: 'expense' },
+  { id: 50, date: '2025-02-26', description: 'Short Manali trip',        category: 'Travel',         amount: 15000, type: 'expense' },
+
+  // March 2025
+  { id: 51, date: '2025-03-01', description: 'Monthly Salary',          category: 'Salary',         amount: 85000, type: 'income'  },
+  { id: 52, date: '2025-03-02', description: 'Rent Payment',             category: 'Rent',           amount: 22000, type: 'expense' },
+  { id: 53, date: '2025-03-04', description: 'Holi celebration food',    category: 'Food & Dining',  amount: 1500,  type: 'expense' },
+  { id: 54, date: '2025-03-06', description: 'Tax filing — CA fee',      category: 'Utilities',      amount: 3000,  type: 'expense' },
+  { id: 55, date: '2025-03-08', description: 'Freelance — React app',    category: 'Freelance',      amount: 45000, type: 'income'  },
+  { id: 56, date: '2025-03-10', description: 'Annual health checkup',    category: 'Healthcare',     amount: 4500,  type: 'expense' },
+  { id: 57, date: '2025-03-12', description: 'New monitor — WFH',        category: 'Shopping',       amount: 18000, type: 'expense' },
+  { id: 58, date: '2025-03-15', description: 'Metro + cab mix',          category: 'Transport',      amount: 1100,  type: 'expense' },
+  { id: 59, date: '2025-03-18', description: 'IPL tickets',              category: 'Entertainment',  amount: 3500,  type: 'expense' },
+  { id: 60, date: '2025-03-20', description: 'Electricity bill',         category: 'Utilities',      amount: 1900,  type: 'expense' },
+  { id: 61, date: '2025-03-22', description: 'Book bundle — tech',       category: 'Education',      amount: 2100,  type: 'expense' },
+  { id: 62, date: '2025-03-25', description: 'Mutual Fund SIP',          category: 'Investment',     amount: 5000,  type: 'expense' },
+  { id: 63, date: '2025-03-28', description: 'Zomato — week meals',      category: 'Food & Dining',  amount: 3200,  type: 'expense' },
+  { id: 64, date: '2025-03-30', description: 'Weekend brunch',           category: 'Food & Dining',  amount: 1800,  type: 'expense' },
+]
+
+export const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
