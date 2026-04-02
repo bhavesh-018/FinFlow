@@ -28,6 +28,8 @@ export default function TransactionList() {
   const [showFilters, setShowFilters] = useState(false)
   const [modalOpen,   setModalOpen]   = useState(false)
   const [editTarget,  setEditTarget]  = useState(null)
+  const [toast, setToast] = useState("")
+  const [deleteTarget, setDeleteTarget] = useState(null)
 
   const filtered = useMemo(() => applyFilters(transactions, filters), [transactions, filters])
 
@@ -45,18 +47,31 @@ export default function TransactionList() {
     setModalOpen(true)
   }
 
+  function showToast(message) {
+    setToast(message)
+    setTimeout(() => setToast(""), 2500)
+  }
+
   function handleSave(data) {
     if (editTarget) {
       dispatch({ type: 'UPDATE_TRANSACTION', payload: { ...data, id: editTarget.id } })
+      showToast("Transaction updated successfully")
     } else {
       dispatch({ type: 'ADD_TRANSACTION', payload: data })
+      showToast("Transaction added successfully")
     }
   }
 
-  function handleDelete(id) {
-    if (window.confirm('Delete this transaction?')) {
-      dispatch({ type: 'DELETE_TRANSACTION', payload: id })
-    }
+  function handleDelete() {
+    if (!deleteTarget) return
+
+    dispatch({
+      type: 'DELETE_TRANSACTION',
+      payload: deleteTarget.id
+    })
+
+    showToast("Transaction deleted successfully")
+    setDeleteTarget(null)
   }
 
   const hasFilters = filters.search || filters.type !== 'all' ||
@@ -64,6 +79,11 @@ export default function TransactionList() {
 
   return (
     <div className={styles.view}>
+      {toast && (
+          <div className={styles.toast}>
+            {toast}
+          </div>
+        )}
       <div className={styles.pageHeader}>
         <div>
           <h1 className={styles.pageTitle}>Transactions</h1>
@@ -242,7 +262,7 @@ export default function TransactionList() {
                         <button className={styles.editBtn}   onClick={() => openEdit(tx)}>
                           <Pencil size={13} />
                         </button>
-                        <button className={styles.deleteBtn} onClick={() => handleDelete(tx.id)}>
+                        <button className={styles.deleteBtn} onClick={() => setDeleteTarget(tx)}>
                           <Trash2 size={13} />
                         </button>
                       </div>
@@ -254,7 +274,34 @@ export default function TransactionList() {
           </table>
         </div>
       )}
+      
+{deleteTarget && (
+        <div className={styles.deleteOverlay}>
+          <div className={styles.deleteModal}>
+            <h3>Delete Transaction</h3>
+            <p>
+              Are you sure you want to delete{" "}
+              <strong>{deleteTarget.description}</strong>?
+            </p>
 
+            <div className={styles.deleteActions}>
+              <button
+                className={styles.cancelBtn}
+                onClick={() => setDeleteTarget(null)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className={styles.confirmDeleteBtn}
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -262,5 +309,6 @@ export default function TransactionList() {
         initial={editTarget}
       />
     </div>
+    
   )
 }
