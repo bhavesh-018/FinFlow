@@ -8,8 +8,8 @@ export default function MobileHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <div className={styles.logoMark}>FF</div>
-        <span className={styles.logoName}>FinFlow</span>
+        <div className={styles.logoMark}>FB</div>
+        <span className={styles.logoName}>FinBoard</span>
       </div>
       <div className={styles.right}>
         <select

@@ -1,11 +1,18 @@
-import { LayoutDashboard, ArrowLeftRight, Lightbulb, Moon, Sun, ChevronRight } from 'lucide-react'
+import { 
+  BarChart3,
+  Receipt,
+  TrendingUp,
+  Moon,
+  Sun,
+  ChevronRight 
+} from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import styles from './Sidebar.module.css'
 
 const NAV = [
-  { id: 'dashboard',    label: 'Dashboard',    Icon: LayoutDashboard },
-  { id: 'transactions', label: 'Transactions',  Icon: ArrowLeftRight   },
-  { id: 'insights',     label: 'Insights',      Icon: Lightbulb        },
+  { id: 'dashboard',    label: 'Dashboard',    Icon:  BarChart3  },
+  { id: 'transactions', label: 'Transactions',  Icon: Receipt    },
+  { id: 'insights',     label: 'Insights',      Icon: TrendingUp },
 ]
 
 export default function Sidebar() {
@@ -16,10 +23,10 @@ export default function Sidebar() {
       {/* Logo */}
       <div className={styles.logo}>
         <div className={styles.logoMark}>
-          <span>FF</span>
+          <span>FB</span>
         </div>
         <div>
-          <div className={styles.logoName}>FinFlow</div>
+          <div className={styles.logoName}>FinBoard</div>
           <div className={styles.logoSub}>Finance Tracker</div>
         </div>
       </div>

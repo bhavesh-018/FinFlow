@@ -1,11 +1,12 @@
-import { LayoutDashboard, ArrowLeftRight, Lightbulb } from 'lucide-react'
+import {BarChart3, Receipt, TrendingUp, } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import styles from './MobileNav.module.css'
+import { Bar } from 'recharts'
 
 const TABS = [
-  { id: 'dashboard',    label: 'Home',    Icon: LayoutDashboard },
-  { id: 'transactions', label: 'Transactions',    Icon: ArrowLeftRight   },
-  { id: 'insights',     label: 'Insights',Icon: Lightbulb        },
+  { id: 'dashboard',    label: 'Home',    Icon: BarChart3  },
+  { id: 'transactions', label: 'Transactions',    Icon: Receipt   },
+  { id: 'insights',     label: 'Insights',Icon: TrendingUp        },
 ]
 
 export default function MobileNav() {
