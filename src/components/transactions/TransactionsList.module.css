@@ -428,3 +428,132 @@
     transform: translateY(0);
   }
 }
+/* Mobile transaction list */
+.desktopTable {
+  display: block;
+}
+
+.mobileList {
+  display: none;
+}
+
+.mobileRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.mobileRow:last-child {
+  border-bottom: none;
+}
+
+.mobileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobilePrice {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+}
+
+.mobileMenuWrap {
+  position: relative;
+}
+
+.mobileMenuBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 18px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mobileMenuBtn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.mobileDropdown {
+  position: absolute;
+  right: 0;
+  top: 38px;
+  min-width: 100px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 100;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.mobileDropdown button {
+  width: 100%;
+  padding: 10px 12px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mobileDropdown button:hover {
+  background: var(--bg-hover);
+}
+
+@media (max-width: 768px) {
+  .desktopTable {
+    display: none;
+  }
+
+  .mobileList {
+    display: block;
+  }
+
+  .table {
+    display: none;
+  }
+}
+.mobileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobileMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.mobileCategory {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.mobileDate {
+  color: var(--text-muted);
+}
+
+.mobileDot {
+  opacity: 0.6;
+}

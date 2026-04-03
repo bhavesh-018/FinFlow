@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef, useEffect } from 'react'
 import { Search, SlidersHorizontal, Plus, Pencil, Trash2, Download, X } from 'lucide-react'
 import { useApp } from '../../context/AppContext'
 import { applyFilters, formatCurrency, formatDate } from '../../utils/helpers'
@@ -30,6 +30,21 @@ export default function TransactionList() {
   const [editTarget,  setEditTarget]  = useState(null)
   const [toast, setToast] = useState("")
   const [deleteTarget, setDeleteTarget] = useState(null)
+  const [openMenuId, setOpenMenuId] = useState(null)
+
+  useEffect(() => {
+      function handleOutsideClick() {
+        if (openMenuId !== null) {
+          setOpenMenuId(null)
+        }
+      }
+
+      document.addEventListener("click", handleOutsideClick)
+
+      return () => {
+        document.removeEventListener("click", handleOutsideClick)
+      }
+    }, [openMenuId])
 
   const filtered = useMemo(() => applyFilters(transactions, filters), [transactions, filters])
 
@@ -217,62 +232,114 @@ export default function TransactionList() {
         </div>
       ) : (
         <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Type</th>
-                <th className={styles.right}>Amount</th>
-                {isAdmin && <th className={styles.center}>Actions</th>}
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((tx, i) => (
-                <tr
-                  key={tx.id}
-                  className={styles.row}
-                  style={{ animationDelay: `${Math.min(i * 20, 300)}ms` }}
-                >
-                  <td className={styles.dateCell}>{formatDate(tx.date)}</td>
-                  <td className={styles.descCell}>{tx.description}</td>
-                  <td>
-                    <span
-                      className={styles.catChip}
-                      style={{
-                        background: (CATEGORY_COLORS[tx.category] ?? 'var(--accent)') + '22',
-                        color: CATEGORY_COLORS[tx.category] ?? 'var(--accent)',
-                      }}
-                    >
-                      {tx.category}
-                    </span>
-                  </td>
-                  <td>
-                    <span className={`${styles.typePill} ${tx.type === 'income' ? styles.inc : styles.exp}`}>
-                      {tx.type === 'income' ? '↑' : '↓'} {tx.type}
-                    </span>
-                  </td>
-                  <td className={`${styles.right} ${styles.amount} ${tx.type === 'income' ? styles.incAmt : ''}`}>
-                    {tx.type === 'income' ? '+' : '-'}{formatCurrency(tx.amount)}
-                  </td>
-                  {isAdmin && (
-                    <td className={styles.center}>
-                      <div className={styles.rowActions}>
-                        <button className={styles.editBtn}   onClick={() => openEdit(tx)}>
-                          <Pencil size={13} />
-                        </button>
-                        <button className={styles.deleteBtn} onClick={() => setDeleteTarget(tx)}>
-                          <Trash2 size={13} />
-                        </button>
-                      </div>
-                    </td>
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  {/* Desktop table */}
+  <div className={styles.desktopTable}>
+    <table className={styles.table}>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th className={styles.right}>Amount</th>
+          {isAdmin && <th className={styles.center}>Actions</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {filtered.map((tx, i) => (
+          <tr
+            key={tx.id}
+            className={styles.row}
+            style={{ animationDelay: `${Math.min(i * 20, 300)}ms` }}
+          >
+            <td className={styles.dateCell}>{formatDate(tx.date)}</td>
+            <td className={styles.descCell}>{tx.description}</td>
+            <td>
+              <span className={styles.catChip}
+              style={{
+                  background: (CATEGORY_COLORS[tx.category] ?? 'var(--accent)') + '22',
+                  color: CATEGORY_COLORS[tx.category] ?? 'var(--accent)',
+                }}>
+                {tx.category}
+              </span>
+            </td>
+            <td>
+              <span className={`${styles.typePill} ${tx.type === 'income' ? styles.inc : styles.exp}`}>
+                {tx.type === 'income' ? '↑' : '↓'} {tx.type}
+              </span>
+            </td>
+            <td className={`${styles.right} ${styles.amount}`}>
+              {tx.type === 'income' ? '+' : '-'}{formatCurrency(tx.amount)}
+            </td>
+            {isAdmin && (
+              <td className={styles.center}>
+                <div className={styles.rowActions}>
+                  <button className={styles.editBtn} onClick={() => openEdit(tx)}>
+                    <Pencil size={13} />
+                  </button>
+                  <button className={styles.deleteBtn} onClick={() => setDeleteTarget(tx)}>
+                    <Trash2 size={13} />
+                  </button>
+                </div>
+              </td>
+            )}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {/* Mobile list */}
+  <div className={styles.mobileList}>
+    {filtered.map((tx) => (
+      <div key={tx.id} className={styles.mobileRow}>
+        <div className={styles.mobileInfo}>
+            <p className={styles.mobileName}>{tx.description}</p>
+
+            <p className={styles.mobileMeta}>
+              <span className={styles.mobileCategory} style={{
+    color: CATEGORY_COLORS[tx.category] ?? 'var(--accent)',
+  }}>
+                {tx.category}
+              </span>
+              <span className={styles.mobileDot}>•</span>
+              <span className={styles.mobileDate}>
+                {formatDate(tx.date)}
+              </span>
+            </p>
+
+            <p
+              className={`${styles.mobilePrice} ${
+                tx.type === 'income' ? styles.incAmt : ''
+              }`}
+            >
+              {tx.type === 'income' ? '+' : '-'}
+              {formatCurrency(tx.amount)}
+            </p>
+          </div>
+
+        <div className={styles.mobileMenuWrap}>
+          <button
+            className={styles.mobileMenuBtn}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenMenuId(openMenuId === tx.id ? null : tx.id)
+            }}
+          >
+            ⋮
+          </button>
+
+          {openMenuId === tx.id && (
+            <div className={styles.mobileDropdown}>
+              <button onClick={() => openEdit(tx)}>Edit</button>
+              <button onClick={() => setDeleteTarget(tx)}>Delete</button>
+            </div>
+          )}
         </div>
+      </div>
+    ))}
+  </div>
+</div>
       )}
       
 {deleteTarget && (
