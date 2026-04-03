@@ -4,7 +4,7 @@ import styles from './MobileNav.module.css'
 
 const TABS = [
   { id: 'dashboard',    label: 'Home',    Icon: LayoutDashboard },
-  { id: 'transactions', label: 'Txns',    Icon: ArrowLeftRight   },
+  { id: 'transactions', label: 'Transactions',    Icon: ArrowLeftRight   },
   { id: 'insights',     label: 'Insights',Icon: Lightbulb        },
 ]
 
