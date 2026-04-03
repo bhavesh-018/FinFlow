@@ -31,6 +31,8 @@ export default function TransactionList() {
   const [toast, setToast] = useState("")
   const [deleteTarget, setDeleteTarget] = useState(null)
   const [openMenuId, setOpenMenuId] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 8
 
   useEffect(() => {
       function handleOutsideClick() {
@@ -47,6 +49,18 @@ export default function TransactionList() {
     }, [openMenuId])
 
   const filtered = useMemo(() => applyFilters(transactions, filters), [transactions, filters])
+
+  const totalPages = Math.ceil(filtered.length / itemsPerPage)
+
+  const paginatedTransactions = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    return filtered.slice(startIndex, endIndex)
+  }, [filtered, currentPage])
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters, transactions])
 
   function setFilter(patch) {
     dispatch({ type: 'SET_FILTER', payload: patch })
@@ -257,7 +271,7 @@ export default function TransactionList() {
         </tr>
       </thead>
       <tbody>
-        {filtered.map((tx, i) => (
+        {paginatedTransactions.map((tx, i) => (
           <tr
             key={tx.id}
             className={styles.row}
@@ -302,7 +316,7 @@ export default function TransactionList() {
 
   {/* Mobile list */}
   <div className={styles.mobileList}>
-    {filtered.map((tx) => (
+    {paginatedTransactions.map((tx) => (
       <div key={tx.id} className={styles.mobileRow}>
         <div className={styles.mobileInfo}>
             <p className={styles.mobileName}>{tx.description}</p>
@@ -353,6 +367,37 @@ export default function TransactionList() {
 </div>
       )}
       
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          <button
+            className={styles.pageBtn}
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+          >
+            Prev
+          </button>
+
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              className={`${styles.pageBtn} ${
+                currentPage === index + 1 ? styles.activePage : ''
+              }`}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
+
+          <button
+            className={styles.pageBtn}
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
 {deleteTarget && (
         <div className={styles.deleteOverlay}>
           <div className={styles.deleteModal}>
