@@ -368,36 +368,67 @@ export default function TransactionList() {
       )}
       
       {totalPages > 1 && (
-        <div className={styles.pagination}>
-          <button
-            className={styles.pageBtn}
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-          >
-            Prev
-          </button>
+      <div className={styles.pagination}>
+        <button
+          className={styles.pageBtn}
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+        >
+          Prev
+        </button>
 
-          {Array.from({ length: totalPages }, (_, index) => (
+        {Array.from(
+          {
+            length: Math.min(5, totalPages),
+          },
+          (_, index) => {
+            let pageNumber
+
+            if (totalPages <= 5) {
+              pageNumber = index + 1
+            } else if (currentPage <= 3) {
+              pageNumber = index + 1
+            } else if (currentPage >= totalPages - 2) {
+              pageNumber = totalPages - 4 + index
+            } else {
+              pageNumber = currentPage - 2 + index
+            }
+
+            return (
+              <button
+                key={pageNumber}
+                className={`${styles.pageBtn} ${
+                  currentPage === pageNumber ? styles.activePage : ''
+                }`}
+                onClick={() => setCurrentPage(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            )
+          }
+        )}
+
+        {totalPages > 5 && currentPage < totalPages - 2 && (
+          <>
+            <span className={styles.ellipsis}>...</span>
             <button
-              key={index + 1}
-              className={`${styles.pageBtn} ${
-                currentPage === index + 1 ? styles.activePage : ''
-              }`}
-              onClick={() => setCurrentPage(index + 1)}
+              className={styles.pageBtn}
+              onClick={() => setCurrentPage(totalPages)}
             >
-              {index + 1}
+              {totalPages}
             </button>
-          ))}
+          </>
+        )}
 
-          <button
-            className={styles.pageBtn}
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            Next
-          </button>
-        </div>
-      )}
+        <button
+          className={styles.pageBtn}
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+        >
+          Next
+        </button>
+      </div>
+    )}
 {deleteTarget && (
         <div className={styles.deleteOverlay}>
           <div className={styles.deleteModal}>
