@@ -100,48 +100,59 @@ export default function TransactionList() {
           </div>
         )}
       <div className={styles.pageHeader}>
-        <div>
-          <h1 className={styles.pageTitle}>Transactions</h1>
-          <p className={styles.pageSub}>{filtered.length} records {hasFilters ? '(filtered)' : ''}</p>
-        </div>
-        <div className={styles.actions}>
-          <button
-            className={`${styles.iconBtn} ${hasFilters ? styles.active : ''}`}
-            onClick={() => setShowFilters(v => !v)}
-            title="Filters"
-          >
-            <SlidersHorizontal size={16} />
-          </button>
-          <button
-            className={styles.iconBtn}
-            onClick={() => exportCSV(filtered)}
-            title="Export CSV"
-          >
-            <Download size={16} />
-          </button>
-          {isAdmin && (
-            <button className={styles.addBtn} onClick={openAdd}>
-              <Plus size={15} /> Add
-            </button>
-          )}
-        </div>
-      </div>
+  <div>
+    <h1 className={styles.pageTitle}>Transactions</h1>
+    <p className={styles.pageSub}>
+      {filtered.length} records {hasFilters ? '(filtered)' : ''}
+    </p>
+  </div>
+</div>
 
-      {/* Search bar */}
-      <div className={styles.searchWrap}>
-        <Search size={15} className={styles.searchIcon} />
-        <input
-          className={styles.searchInput}
-          placeholder="Search transactions..."
-          value={filters.search}
-          onChange={e => setFilter({ search: e.target.value })}
-        />
-        {filters.search && (
-          <button className={styles.clearBtn} onClick={() => setFilter({ search: '' })}>
-            <X size={13} />
-          </button>
-        )}
-      </div>
+<div className={styles.searchRow}>
+  <div className={styles.searchWrap}>
+    <Search size={15} className={styles.searchIcon} />
+    <input
+      className={styles.searchInput}
+      placeholder="Search transactions..."
+      value={filters.search}
+      onChange={(e) => setFilter({ search: e.target.value })}
+    />
+    {filters.search && (
+      <button
+        className={styles.clearBtn}
+        onClick={() => setFilter({ search: '' })}
+      >
+        <X size={13} />
+      </button>
+    )}
+  </div>
+
+  <div className={styles.searchActions}>
+    <button
+      className={`${styles.iconBtn} ${
+        hasFilters ? styles.active : ''
+      }`}
+      onClick={() => setShowFilters((v) => !v)}
+      title="Filters"
+    >
+      <SlidersHorizontal size={16} />
+    </button>
+
+    <button
+      className={styles.iconBtn}
+      onClick={() => exportCSV(filtered)}
+      title="Export CSV"
+    >
+      <Download size={16} />
+    </button>
+
+    {isAdmin && (
+      <button className={styles.addBtn} onClick={openAdd}>
+        <Plus size={15} />
+      </button>
+    )}
+  </div>
+</div>
 
       {/* Filter panel */}
       {showFilters && (

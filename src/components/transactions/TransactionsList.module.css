@@ -557,3 +557,29 @@
 .mobileDot {
   opacity: 0.6;
 }
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.searchWrap {
+  flex: 1;
+  position: relative;
+}
+
+.searchActions {
+  display: flex;
+  gap: 8px;
+}
+@media (max-width: 768px) {
+  .searchRow {
+    gap: 6px;
+  }
+
+  .addBtn {
+    padding: 10px;
+    min-width: 30px;
+  }
+}
