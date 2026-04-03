@@ -3,7 +3,7 @@ import { INITIAL_TRANSACTIONS } from '../data/transactions'
 
 const AppContext = createContext(null)
 
-const STORAGE_KEY = 'finflow_data'
+const STORAGE_KEY = 'finboard_data'
 
 function loadFromStorage() {
   try {
