@@ -102,6 +102,25 @@ Switchable via sidebar dropdown. Persisted to localStorage.
 
 ---
 
+## Project Screenshots
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.jpeg)
+
+### Transactions Page
+![Transactions](./screenshots/transactions.jpeg)
+
+### Add Transaction
+![Add Transaction](./screenshots/add-transaction.jpeg)
+
+### Insights
+![Insights](./screenshots/insights.jpeg)
+
+### Mobile View
+![Mobile](./screenshots/mobile-view.jpeg)
+
+---
+
 ## Architecture Decisions
 
 **Why Context + useReducer instead of Zustand or Redux?**
