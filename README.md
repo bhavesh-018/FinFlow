@@ -19,8 +19,8 @@ The project goes beyond the stated requirements in three ways:
 ## Quick Start
 
 ```bash
-git clone https://github.com/yourusername/zorvyn-finance-dashboard
-cd zorvyn-finance-dashboard
+git clone https://github.com/yourusername/FinBoard
+cd FinBoard
 npm install
 npm run dev
 ```
