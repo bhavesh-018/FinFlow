@@ -183,7 +183,7 @@ Actions: `SET_ROLE` · `TOGGLE_THEME` · `SET_TAB` · `SET_FILTER` · `RESET_FIL
 
 ## Mock Data
 
-64 transactions from **November 2024 – March 2025** across 12 categories: Salary, Freelance, Rent, Food & Dining, Transport, Shopping, Entertainment, Healthcare, Utilities, Investment, Education, Travel. Intentionally varied to produce meaningful chart patterns.
+64 transactions from **November 2025 – March 2026** across 12 categories: Salary, Freelance, Rent, Food & Dining, Transport, Shopping, Entertainment, Healthcare, Utilities, Investment, Education, Travel. Intentionally varied to produce meaningful chart patterns.
 
 ---
 
